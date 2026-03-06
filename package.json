@@ -1,0 +1,50 @@
+{
+  "name": "do-it-like-mike",
+  "version": "0.1.0",
+  "description": "Don't half ass it. Do it like Mike. A profile-driven AI development framework that combines the best of GSD, M2C1, PRP, BMAD, and PAUL.",
+  "type": "module",
+  "bin": {
+    "do-it-like-mike": "bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "commands/",
+    "agents/",
+    "workflows/",
+    "templates/",
+    "references/",
+    "hooks/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "prepublishOnly": "node bin/validate.js"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "anthropic",
+    "ai",
+    "development-workflow",
+    "project-management",
+    "orchestration",
+    "document-sharding",
+    "parallel-execution",
+    "multi-agent",
+    "planning",
+    "verification",
+    "profile-driven",
+    "mike"
+  ],
+  "author": "Vicente Alvarez Asencio",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

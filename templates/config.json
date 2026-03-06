@@ -1,0 +1,89 @@
+{
+  "mike_version": "0.1.0",
+  "project_name": "{{PROJECT_NAME}}",
+  "profile": "gold",
+  "scale_level": null,
+  "scale_mode": "auto",
+
+  "planning": {
+    "depth": "scale-adaptive",
+    "research_waves": "scale-adaptive",
+    "completeness_gate": true,
+    "synergy_review": false
+  },
+
+  "architecture": {
+    "gate": "scale-adaptive",
+    "gate_threshold": 90,
+    "party_mode": false,
+    "role_constraints": false
+  },
+
+  "sharding": {
+    "enabled": "scale-adaptive",
+    "bdd_acceptance": true,
+    "boundary_declarations": true,
+    "error_patterns": false,
+    "skills_bundled": false,
+    "max_tasks_per_shard": 3,
+    "target_context_budget": 50
+  },
+
+  "execution": {
+    "model": "scale-adaptive",
+    "max_concurrency": 3,
+    "ralph_loop": false,
+    "ralph_threshold": 3,
+    "tdd_available": true,
+    "persistent_debug": true
+  },
+
+  "verification": {
+    "qa_independence": "scale-adaptive",
+    "state_consistency": "blocking",
+    "regression": true,
+    "goal_backward": false,
+    "uat": true,
+    "pre_commit_hooks": []
+  },
+
+  "git": {
+    "commit_prefix": "mike",
+    "commit_per": "task",
+    "branching": "scale-adaptive",
+    "milestone_tags": true,
+    "phase_commits": true
+  },
+
+  "context": {
+    "monitoring": "scale-adaptive",
+    "quality_threshold": 50,
+    "hooks_enabled": true
+  },
+
+  "rules_engine": {
+    "mode": "dynamic",
+    "core_rules_count": 12
+  },
+
+  "phase_overrides": {},
+
+  "design": {
+    "enabled": true,
+    "auto_skip_non_ui": true,
+    "industry": null,
+    "audience": null,
+    "brand_colors": null,
+    "brand_fonts": null,
+    "style_override": null,
+    "dark_mode": false
+  },
+
+  "metrics": {
+    "execution_history": [],
+    "total_tasks_completed": 0,
+    "total_deviations": 0,
+    "peak_team_size": 0,
+    "total_debug_cycles": 0
+  }
+}

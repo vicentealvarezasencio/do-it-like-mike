@@ -1,0 +1,22 @@
+{
+  "project": "{{PROJECT_NAME}}",
+  "version": "0.1.0",
+  "profile": "gold",
+  "scale_level": null,
+  "current_milestone": 1,
+  "current_phase": null,
+  "phase_status": null,
+  "loop_position": null,
+  "active_team": null,
+  "completed_phases": [],
+  "decisions": [],
+  "blockers": [],
+  "deferred_issues": [],
+  "session": {
+    "started": "{{ISO_TIMESTAMP}}",
+    "last_command": "/mike:init",
+    "last_updated": "{{ISO_TIMESTAMP}}",
+    "context_bracket": "FRESH"
+  },
+  "history": []
+}
