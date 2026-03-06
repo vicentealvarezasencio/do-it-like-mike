@@ -1,6 +1,6 @@
 {
   "name": "do-it-like-mike",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Don't half ass it. Do it like Mike. A profile-driven AI development framework that combines the best of GSD, M2C1, PRP, BMAD, and PAUL.",
   "type": "module",
   "bin": {

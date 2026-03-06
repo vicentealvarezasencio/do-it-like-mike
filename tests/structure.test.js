@@ -548,9 +548,9 @@ describe('Phase 7 Completion', () => {
     }
   });
 
-  it('package.json version is 1.0.0', () => {
+  it('package.json version is 1.1.0', () => {
     const pkg = JSON.parse(fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf8'));
-    assert.equal(pkg.version, '1.0.0');
+    assert.equal(pkg.version, '1.1.0');
   });
 });
 
