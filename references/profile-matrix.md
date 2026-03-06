@@ -123,7 +123,7 @@ Complete behavior matrix for all commands across all profiles. This is the autho
 | BLITZ | Quick tasks, bug fixes, config changes | None (inline) | Sequential, in-session | Build + test only |
 | SPRINT | Standard features, multi-phase work | Per-phase plans, 1 research wave | 2-3 parallel executors | Goal-backward analysis |
 | FORGE | Complex features, design-heavy projects | Front-loaded: discover + research + architect + design + shard | 3-5 parallel sharded executors | Independent QA + design compliance |
-| CITADEL | Mission-critical, maximum rigor | Front-loaded + party mode + synergy review | 5+ parallel sharded executors | 6-layer (+ regression + security) |
+| CITADEL | Mission-critical, maximum rigor | Front-loaded + party mode + synergy review | 5+ parallel sharded executors | 7-layer (+ functional + regression + security) |
 | SCOUT | Brownfield, existing codebases | Codebase-first: map before plan | Sequential, in-session | Self-verify + existing tests |
 | GOLD | Auto-adaptive (detects scale L0-L4) | Scale-adaptive | Scale-adaptive | Scale-adaptive |
 

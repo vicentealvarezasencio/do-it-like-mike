@@ -51,7 +51,7 @@ For the resolved profile, return the behavior set for the current command:
 | `design` | Skip | Lightweight (auto) | Standard (full system) | Full (per-page + approval) | Extract (reverse-engineer) |
 | `shard` | Skip (single task list) | Skip (per-phase plans) | Full atomic sharding | Full + synergy | Skip (feature plans) |
 | `execute` | In-session sequential | Wave-parallel (2-3) | Wave-parallel sharded (3-5) | Wave-parallel sharded (5+) | In-session sequential |
-| `verify` | Lint+test only | Verifier agent | Independent QA | 6-layer verification | Self + existing tests |
+| `verify` | Lint+test only | Verifier agent | Independent QA | 7-layer verification | Self + existing tests |
 | `unify` | Lightweight (<30 lines) | Standard | Full (AC table, 3-loc decisions) | Full + synergy + false positive | Full + codebase delta |
 
 ### Step 4 — Load Rules

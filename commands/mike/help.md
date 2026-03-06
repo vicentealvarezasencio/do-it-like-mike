@@ -81,7 +81,7 @@ PROFILES:
   BLITZ    — Quick tasks, minimal process
   SPRINT   — Per-phase planning, wave-parallel execution
   FORGE    — Front-loaded planning, document sharding, independent QA
-  CITADEL  — Maximum rigor, party mode, 6-layer verification
+  CITADEL  — Maximum rigor, party mode, 7-layer verification
   SCOUT    — Existing codebase, boundary enforcement
   GOLD     — Auto-adaptive (L0-L4 scale detection)
 ```

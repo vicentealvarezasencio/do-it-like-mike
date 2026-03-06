@@ -64,7 +64,7 @@ People building software with Claude Code who want the framework to match the pr
 
 - **Prototyping?** MIKE runs lean. 3 steps, no subagents, ship in an hour.
 - **Building a real product?** MIKE plans each phase, shards tasks for parallel execution, and verifies against goals.
-- **Working on a production system?** MIKE debates architecture with multi-agent Party Mode, enforces 6-layer verification, and writes structured retrospectives.
+- **Working on a production system?** MIKE debates architecture with multi-agent Party Mode, enforces 7-layer verification, and writes structured retrospectives.
 - **Adding features to existing code?** MIKE analyzes the codebase first with 4 parallel mapping agents, then enforces boundaries so nothing breaks.
 - **Not sure what you need?** MIKE detects your project's scale and adapts automatically.
 
@@ -125,7 +125,7 @@ BLITZ ──────── SPRINT ──────── FORGE ───�
 | **BLITZ** | Hackathons, prototypes, quick fixes | Minimal — inline task list | In-session, sequential | Lint + test loop |
 | **SPRINT** | Side projects, MVPs, small apps | Per-phase plans with AC | Wave-parallel (2-3 agents) | Verifier agent |
 | **FORGE** | Production apps, client work, SaaS | Front-loaded + document sharding | Wave-parallel sharded (3-5 agents) | Independent QA |
-| **CITADEL** | Mission-critical, regulated, enterprise | Exhaustive + Party Mode debates | Wave-parallel sharded (5+ agents) | 6-layer verification |
+| **CITADEL** | Mission-critical, regulated, enterprise | Exhaustive + Party Mode debates | Wave-parallel sharded (5+ agents) | 7-layer verification |
 | **SCOUT** | Legacy code, existing codebases | Codebase-first analysis | In-session with boundary enforcement | Codebase delta analysis |
 | **GOLD** | Any project — auto-adaptive | Scale-detected (L0-L4) | Scale-detected | Scale-detected |
 
@@ -290,7 +290,7 @@ Every task gets an atomic git commit. Walk away, come back to completed work wit
 /mike:unify        # Mandatory closure — planned vs. actual reconciliation
 ```
 
-**Verify** checks that what was built matches what was planned. CITADEL runs 6 layers: per-task verification, independent QA, phase regression tests, goal-backward verification, design compliance, and user acceptance testing.
+**Verify** checks that what was built matches what was planned. CITADEL runs 7 layers: build, tests, goal-backward analysis, automated functional testing (Playwright for web, XcodeBuildMCP for iOS/macOS), design compliance, regression, and security.
 
 **Unify** is the non-negotiable step. Every execution unit closes with a SUMMARY.md that reconciles planned vs. actual, reports acceptance criteria pass/fail, logs deviations, captures decisions, and defers out-of-scope issues. No orphaned work. No "I think that was done."
 
@@ -369,6 +369,15 @@ Quality degrades at ~50% context usage. MIKE prevents that from happening silent
 ### Design System Generation
 
 For UI projects: 67 styles, 96 palettes, 100 industry-specific rules. MIKE matches your industry to appropriate visual patterns and generates design tokens (CSS variables, Tailwind config) that get sharded into executor contexts. Every parallel agent builds with the same visual language.
+
+### Automated Functional Testing
+
+MIKE doesn't just check that code exists — it verifies that it *works*. When Playwright MCP or XcodeBuildMCP is available, Layer 4 (Functional Verification) maps your acceptance criteria to automated test scenarios:
+
+- **Web apps:** Playwright opens a browser, navigates pages, fills forms, clicks buttons, and takes screenshots as evidence
+- **iOS/macOS apps:** XcodeBuildMCP builds to a simulator, launches the app, taps through UI flows, inspects view hierarchy, and captures screenshots
+
+Each AC produces a PASS/FAIL with a screenshot saved to `.mike/phases/{N}-{name}/screenshots/`. The verifier agent never saw the code being built — it tests independently against a running application.
 
 ### Ralph Loop (from PRP)
 
@@ -481,6 +490,7 @@ Scopes: `phase-{N}`, `phase-{N}-shard-{NN}`, `ralph-{N}`, `roadmap`, `milestone`
 | Document sharding | No | Yes | No | No | No | **Yes (FORGE+)** |
 | Mandatory closure | No | No | Yes | No | No | **Yes (all profiles)** |
 | Wave-parallel execution | Yes | No | No | No | No | **Yes (SPRINT+)** |
+| Automated UI testing | No | No | No | No | No | **Yes (Playwright + XcodeBuildMCP)** |
 | Context monitoring | Yes | No | Yes | No | No | **Yes (all profiles)** |
 | Design system generation | No | No | No | No | No | **Yes (67 styles, 96 palettes)** |
 | Codebase analysis | Yes | No | No | No | No | **Yes (7-doc, 4 agents)** |

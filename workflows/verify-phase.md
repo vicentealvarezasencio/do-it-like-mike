@@ -19,16 +19,81 @@ Independent verification that phase goal was achieved.
 - Check each: Exists → Substantive → Wired → Functional
 - Produce AC results table (PASS/FAIL per criterion)
 
-### Layer 4: Design Compliance (FORGE+ with DESIGN.md)
+### Layer 4: Functional Verification (SPRINT+)
+
+Automated testing against a running application. Auto-detected from tech stack — uses Playwright MCP for web apps, XcodeBuildMCP for iOS/macOS apps. Skipped if no applicable tool is available or project has no runnable UI.
+
+**4a. Detect Project Type**
+
+| Tech Stack | Tool | How Detected |
+|---|---|---|
+| Web (React, Next.js, Vue, Svelte, HTML) | Playwright MCP | Web framework in `config.json` or `index.html` exists |
+| iOS / macOS (Swift, SwiftUI, UIKit) | XcodeBuildMCP | Swift in tech stack or `.xcodeproj`/`.xcworkspace` exists |
+| API / CLI | Playwright (API mode) or skip | REST/GraphQL endpoints in AC |
+| Other | Skip | Mark SKIP with justification |
+
+**4b. Map Acceptance Criteria to Test Scenarios**
+
+Read AC from PLAN.md / SHARDs / SUMMARY.md. For each AC, derive:
+- Target (URL, screen, endpoint)
+- Interactions (navigate, click, fill, tap, swipe)
+- Assertions (element visible, text matches, URL changed, status code)
+- Screenshot name for evidence
+
+**4c. Execute — Playwright (Web Apps)**
+
+1. Start dev server if not running (`npm run dev`, `next dev`, etc.)
+2. Wait for server ready (poll localhost until responsive)
+3. For each scenario:
+   - `browser_navigate` to target URL
+   - `browser_snapshot` to inspect page state
+   - `browser_click`, `browser_fill_form`, `browser_select_option` as needed
+   - Assert expected state via `browser_snapshot` or `browser_evaluate`
+   - `browser_take_screenshot` as evidence
+   - Record PASS/FAIL with details
+4. Collect `browser_console_messages` for error signals
+5. Check `browser_network_requests` for failed API calls
+
+**4d. Execute — XcodeBuildMCP (iOS/macOS Apps)**
+
+1. `discover_projs` to find project/workspace
+2. `list_schemes` and `list_sims` to identify build target
+3. `build_sim` to compile for simulator
+4. `boot_sim` and `launch_app_sim` to start the app
+5. For each scenario:
+   - `screenshot` to capture current state
+   - `snapshot_ui` to inspect view hierarchy with coordinates
+   - Perform interactions via XcodeBuildMCP UI automation tools
+   - Assert expected state via `snapshot_ui` (element exists, text matches)
+   - `screenshot` as evidence
+   - Record PASS/FAIL with details
+6. `start_sim_log_cap` / `stop_sim_log_cap` for error signals
+
+**4e. Functional Verification Report**
+
+```markdown
+## Functional Verification
+
+| AC | Scenario | Tool | Result | Evidence |
+|----|----------|------|--------|----------|
+| AC-1 | Login flow | Playwright | PASS | screenshots/login-success.png |
+| AC-2 | Dashboard | Playwright | FAIL | Expected 3 cards, found 0 |
+| AC-3 | Settings | XcodeBuildMCP | PASS | screenshots/settings-screen.png |
+```
+
+Screenshots saved to `.mike/phases/{N}-{name}/screenshots/`.
+
+### Layer 5: Design Compliance (FORGE+ with DESIGN.md)
 - Color contrast check (WCAG 2.1 AA)
 - Token usage audit (no hardcoded colors)
 - Anti-pattern scan
 - Responsive check
 - Design checklist reconciliation
+- Use screenshots from Layer 4 for visual validation when available
 
-### Layer 5: Regression (CITADEL / GOLD L4)
+### Layer 6: Regression (CITADEL / GOLD L4)
 
-Full regression analysis — not just "did new tests pass" but "did we break anything that used to work."
+Full regression analysis — not just "did new tests pass" but "did we break anything that used to work." Also re-runs functional test scenarios from prior phases if they exist.
 
 **5a. Full Test Suite Execution**
 - Run ALL tests across the entire project, not just tests for the current phase
@@ -56,7 +121,7 @@ For each previously completed phase:
 | Phase 1 | AC-1: ... | YES/NO | ... |
 ```
 
-### Layer 6: Security (CITADEL / GOLD L4)
+### Layer 7: Security (CITADEL / GOLD L4)
 
 Stack-appropriate security audit focused on the OWASP Top 10 and common AI-era pitfalls.
 
@@ -96,6 +161,7 @@ Only check items relevant to the project's stack and scope. Skip inapplicable ch
 
 ## Output
 - `.mike/phases/{N}-{name}/VERIFICATION.md`
+- `.mike/phases/{N}-{name}/screenshots/` — functional test evidence (Layer 4)
 - Regression report (CITADEL): cross-phase integration results
 - Security report (CITADEL): OWASP + secrets + dependency audit
 - State updated: `phase_status` = "verified", `loop_position` = "VERIFY"

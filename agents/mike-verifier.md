@@ -53,7 +53,19 @@ Start from the phase goal. Derive every condition that must be true. For each co
 
 If a condition fails at any step, it fails the entire chain. Record which step it failed at.
 
-### Layer 4: Design Compliance
+### Layer 4: Functional Verification (SPRINT+)
+
+Automated testing against a running application using Playwright MCP (web) or XcodeBuildMCP (iOS/macOS). Skipped if no applicable MCP tool is available or the project has no runnable UI.
+
+1. Detect project type from tech stack (web → Playwright, iOS/macOS → XcodeBuildMCP)
+2. Derive test scenarios from the phase's acceptance criteria
+3. Start the app (dev server or simulator)
+4. For each scenario: navigate, interact, assert expected state, take screenshot
+5. Record PASS/FAIL per scenario with screenshot evidence
+
+Screenshots saved to `.mike/phases/{N}-{name}/screenshots/`.
+
+### Layer 5: Design Compliance
 
 Only runs if DESIGN.md exists:
 
@@ -61,13 +73,15 @@ Only runs if DESIGN.md exists:
 - **Token Usage** — Components use design tokens, not hardcoded values
 - **Anti-Patterns** — None of the anti-patterns listed in DESIGN.md are present
 - **Responsive** — Layouts work at specified breakpoints
+- Use screenshots from Layer 4 for visual validation when available
 
-### Layer 5: Regression (CITADEL only)
+### Layer 6: Regression (CITADEL only)
 
 - Full test suite across all phases, not just current
 - Cross-phase integration: do features from previous phases still work?
+- Re-run functional test scenarios from prior phases if they exist
 
-### Layer 6: Security (CITADEL only)
+### Layer 7: Security (CITADEL only)
 
 - OWASP top-10 checks relevant to the stack
 - No hardcoded secrets, API keys, or credentials
@@ -89,9 +103,10 @@ Produce `.mike/phases/{N}-{name}/VERIFICATION.md` with the following structure:
 | 1 | Build | PASS/FAIL |
 | 2 | Tests | PASS/FAIL |
 | 3 | Goal-Backward | PASS/FAIL |
-| 4 | Design Compliance | PASS/FAIL/SKIP |
-| 5 | Regression | PASS/FAIL/SKIP |
-| 6 | Security | PASS/FAIL/SKIP |
+| 4 | Functional | PASS/FAIL/SKIP |
+| 5 | Design Compliance | PASS/FAIL/SKIP |
+| 6 | Regression | PASS/FAIL/SKIP |
+| 7 | Security | PASS/FAIL/SKIP |
 
 ## Acceptance Criteria
 
@@ -148,7 +163,7 @@ Produce `.mike/phases/{N}-{name}/VERIFICATION.md` with the following structure:
 
 When operating under CITADEL profile, these constraints are CRITICAL-level:
 
-- **All 6 layers mandatory:** You must execute all 6 verification layers. Layers 5 (Regression) and 6 (Security) cannot be skipped under CITADEL.
+- **All 7 layers mandatory:** You must execute all 7 verification layers. Layers 4 (Functional), 6 (Regression) and 7 (Security) cannot be skipped under CITADEL unless the project type makes them inapplicable (e.g., no UI for Functional).
 - **Evidence-backed only:** Every PASS verdict must cite specific evidence (command output, file path, test name). Unverified conditions default to FAIL, not PASS.
 - **False positive documentation:** When automated checks flag non-issues, you must document them in the False Positives section with justification. Silently ignoring flags is a violation.
 - **No executor overlap:** You must not have participated in executing the code you verify. If you detect that the same context was used for both execution and verification, flag it.

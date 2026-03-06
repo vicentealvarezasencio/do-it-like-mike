@@ -403,7 +403,15 @@ describe('Phase 6 CITADEL', () => {
     assert.ok(content.includes('Synergy Report'), 'shard workflow missing Synergy Report');
   });
 
-  it('verify-phase workflow has detailed layers 5-6', () => {
+  it('verify-phase workflow has functional verification layer', () => {
+    const content = fs.readFileSync(path.join(workflowsDir, 'verify-phase.md'), 'utf8');
+    assert.ok(content.includes('Functional Verification'), 'verify workflow missing Functional Verification');
+    assert.ok(content.includes('Playwright'), 'verify workflow missing Playwright');
+    assert.ok(content.includes('XcodeBuildMCP'), 'verify workflow missing XcodeBuildMCP');
+    assert.ok(content.includes('screenshots'), 'verify workflow missing screenshots');
+  });
+
+  it('verify-phase workflow has detailed regression and security layers', () => {
     const content = fs.readFileSync(path.join(workflowsDir, 'verify-phase.md'), 'utf8');
     assert.ok(content.includes('Cross-Phase Integration'), 'verify workflow missing Cross-Phase Integration');
     assert.ok(content.includes('Regression Report'), 'verify workflow missing Regression Report');

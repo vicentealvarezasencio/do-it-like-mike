@@ -104,7 +104,7 @@ Warning: Switching from BLITZ to CITADEL adds significant process:
 - Document sharding
 - Independent QA verification
 - Party mode for architecture decisions
-- 6-layer verification
+- 7-layer verification
 
 This is a big jump. Consider FORGE as a middle ground.
 Continue with CITADEL? (yes/no)
