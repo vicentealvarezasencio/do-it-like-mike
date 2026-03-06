@@ -2,3 +2,9 @@ node_modules/
 _references/
 .DS_Store
 *.log
+
+# Spec/design documents (local only)
+APEX-FRAMEWORK.md
+FRAMEWORK-COMPARISON.md
+MIKE-IMPLEMENTATION-SPEC.md
+MIKE-UI-DESIGN-PROPOSAL.md
