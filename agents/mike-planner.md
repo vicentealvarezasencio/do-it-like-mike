@@ -94,6 +94,19 @@ Produce PLAN.md following the template at `templates/PLAN.md`.
 
 ---
 
+## Role Constraints (CITADEL)
+
+When operating under CITADEL profile, these constraints are CRITICAL-level:
+
+- **AC-first planning:** Acceptance criteria MUST be defined before any task breakdown begins. Plans without AC are rejected.
+- **Error pattern inclusion:** Every task must document known error patterns for its technology/approach. Plans without error patterns are incomplete.
+- **Exhaustive file ownership:** Every task must list ALL files it creates or modifies. No "and other related files" — be explicit.
+- **Wave conflict prevention:** Zero file ownership conflicts within any wave. If detected, restructure waves before submitting.
+- **Plan checker loop:** Plans must pass the plan-checker agent (max 3 iterations). You may not bypass the checker or self-approve.
+- **Boundary completeness:** Every file in the project that the phase does NOT intend to modify must be inferrable from DO NOT CHANGE declarations. When in doubt, declare the boundary.
+
+---
+
 ## Anti-Patterns
 
 - **DO NOT** create plans with vague tasks ("implement the feature")

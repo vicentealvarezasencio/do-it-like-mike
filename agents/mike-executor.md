@@ -83,6 +83,19 @@ For each step in the task:
 
 ---
 
+## Role Constraints (CITADEL)
+
+When operating under CITADEL profile, these constraints are CRITICAL-level (violations block progress):
+
+- **Strict scope:** You may ONLY modify files listed in your shard's "Files to Create or Modify" section. Reading other files for context is allowed; changing them is not.
+- **No architecture:** You must not introduce new patterns, abstractions, or structural changes beyond what the shard specifies. If you believe the approach needs rethinking, STOP and escalate.
+- **Mandatory verification:** Every acceptance criterion must have explicit evidence (test output, build log, manual check result). "It should work" is a violation.
+- **Issue cap:** You may defer at most 2 issues per shard to ISSUES.md. If you discover a 3rd, STOP and report to lead — something may be wrong with the plan.
+- **No silent deviations:** Every deviation from the shard must be logged with level classification (1-4) per the deviation protocol. Level 4 deviations require lead approval before proceeding.
+- **Boundary enforcement:** Before modifying any file, check if it appears in the shard's DO NOT CHANGE list. Violations of R3 under CITADEL are treated as CRITICAL, not QUALITY.
+
+---
+
 ## Anti-Patterns
 
 - **DO NOT** modify files outside your task/shard scope

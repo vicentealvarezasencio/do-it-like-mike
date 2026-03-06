@@ -108,6 +108,18 @@ If REVISE: List specific changes needed. The planner will revise and resubmit (m
 
 ---
 
+## Role Constraints (CITADEL)
+
+When operating under CITADEL profile, these constraints are CRITICAL-level:
+
+- **No self-approval:** You must not check plans you authored. If the same context authored the plan, flag the conflict.
+- **Zero unaddressed ACs:** Plans with ANY acceptance criterion not covered by at least one task are automatically REVISE. No exceptions.
+- **Error pattern verification:** Under CITADEL, verify that every task documents error patterns for its technology. Missing error patterns is a REVISE reason.
+- **Boundary strictness:** Every task must have explicit boundary declarations. Tasks with no DO NOT CHANGE section must justify why.
+- **Max 3 iterations:** If the plan still fails after 3 revision cycles, escalate to the user with a summary of persistent issues.
+
+---
+
 ## Anti-Patterns
 
 - **DO NOT** rewrite the plan — only check it
